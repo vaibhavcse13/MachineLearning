@@ -1,0 +1,117 @@
+......>>>>>>Fteching data
+import numpy as np
+import matplotlib.pyplot as plt
+import pandas as pd
+
+data = pd.read_excel("G:/RainData.xls",) # read the Excel data
+data.head() # display the first few lines
+
+............................................>
+
+import seaborn as sns
+
+
+
+sns.pairplot(data, x_vars=['YEAR'], y_vars=['Jun-Sep', 'Mar-May'], size=7, aspect=0.7 , kind='reg')
+
+sns.plt.show() #To show the plot 
+
+
+.............................................>
+
+feature_cols = ['YEAR']
+x = data[feature_cols]
+
+
+
+..................>
+
+y = data['Jun-Sep']
+
+
+................................................>
+
+
+
+print(type(x))
+print(x.shape)
+print(x)
+
+....................................................>
+print(type(y))
+print(y.shape)
+print(y)
+
+
+.........................................................>
+
+from sklearn.cross_validation import train_test_split
+x_train, x_test, y_train, y_test = train_test_split(x ,y, random_state=2)
+
+print(x_train)
+print(y_train)
+print(x_test)
+print(y_test)
+
+...............................................>
+
+from sklearn.linear_model import LinearRegression
+
+linreg = LinearRegression()
+linreg.fit(x_train, y_train )
+
+..................................................>
+
+print(x_train.shape)
+print(x_test.shape)
+print(y_train.shape)
+print(y_test.shape)
+.............................................>
+
+# interpreting the model coefficent 
+print(linreg.intercept_)
+print(linreg.coef_)
+
+..................................................>
+
+# pair the feature name with the coefficient 
+list(zip(feature_cols , linreg.coef_))
+
+
+.....................................................>
+
+y_pred = linreg.predict(x_test)
+
+
+................................................................>
+
+from sklearn import metrics
+print(np.sqrt(metrics.mean_squared_error(y_test, y_pred)))
+
+...................................................................>
+
+list(zip(x_test ,y_pred))
+
+................................................................>
+
+print(x_test , y_pred)
+
+..........................................................>
+
+fig, ax = plt.subplots()
+ax.scatter(x_test, y_pred )
+#ax.plot([y.min(), y.max()], [y.min(), y.max()], 'k--', lw=4)
+ax.set_xlabel('x_test')
+ax.set_ylabel('y_pred')
+plt.show()
+
+......................................................................>
+
+fig, ax = plt.subplots()
+ax.scatter(x_test, y_test )
+#ax.plot([y.min(), y.max()], [y.min(), y.max()], 'k--', lw=4)
+ax.set_xlabel('x_test')
+ax.set_ylabel('y_test')
+plt.show()
+
+.........................................................................>

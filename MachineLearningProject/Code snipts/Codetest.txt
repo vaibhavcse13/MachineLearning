@@ -1,0 +1,85 @@
+import numpy as np
+import matplotlib.pyplot as plt
+import pandas as pd
+
+data = pd.read_excel(bn, 'Sheet1', header=0, parse_cols=1) # read the Excel data
+data.head() # display the first few lines
+
+import numpy as np
+import matplotlib.pyplot as plt
+import pandas as pd
+................................................................................................>
+data = pd.read_excel("G:/RainData.xls") # read the Excel data
+data.head() # display the first few lines
+data
+#plt.plot(data)
+#plt.show()
+
+
+
+
+
+
+.........................................................................................>
+Data visulization with seaborn libray 
+import seaborn as sns
+
+%matplotlib inline 
+
+sns.pairplot(data, x_vars=['JAN','FEB','MAR'], y_vars='YEAR', size=7, aspect=0.7 , kind='reg')
+
+sns.plt.show() #To show the plot 
+
+sns.plt.show() #To show the plot 
+
+....................> With reg 
+
+sns.pairplot(data, x_vars=['JAN','FEB','MAR'], y_vars='YEAR', size=7, aspect=0.7, kind ='reg')
+
+........................................>
+Preparing x and y using panda 
+
+....> create a python list of feature name 
+feature_cols = ['JAN' , 'FEB' , 'MAR']
+
+....>USE the list to select a subset of the original dataframe 
+x = data[feature_cols]
+
+.....> equivalent command to do this in one line 
+x = data[['JAN' , 'FEB' , 'MAR']]
+...> print the first 5 row 
+x.head()
+
+.....> CHECK THE TYPE AND SHAPE OF X 
+print type(x)
+print x.shape 
+
+.........>x is data frame and y is series 
+
+...........................>
+select a series frame from dataframe 
+y = data['YEAR']
+
+..................>
+spliting x and y into training set and testing set for proper model evaluvation 
+
+from sklearn.cross_validation import train_test_split
+x_train, a_test, y_train, y_test = train_test_split(x ,y, random_state=1)
+
+#If there are no space in column name 
+y = data.sales 
+y.head()
+
+
+from sklearn.cross_validation import train_test_split
+x_train, x_test, y_train, y_test = train_test_split(x ,y, random_state=1)
+
+
+#import model
+
+from sklearn.linear_model import LinearRegression
+
+linreg = LinearRegression()
+
+linreg.fit(x_train , y_train)
+ 
